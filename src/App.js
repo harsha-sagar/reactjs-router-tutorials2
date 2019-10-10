@@ -1,55 +1,40 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React from 'react'
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom'
+
+import Home from './components/Home'
+import About from './components/About'
+import Topics from './components/Topics'
 
 export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+        <ul>
+          <li>
+            <Link to='/' >Home</Link>
+          </li>
+          <li>
+            <Link to='/about' >About</Link>
+          </li>
+          <li>
+            <Link to='/topics' >Topics</Link>
+          </li>
+        </ul>
+
         <Switch>
-          <Route path="/about">
+          <Route path='/about'>
             <About />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path='/topics'>
+            <Topics />
           </Route>
-          <Route path="/">
+          <Route path='/'>
             <Home />
           </Route>
         </Switch>
+
       </div>
-    </Router>
-  );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
+    </BrowserRouter>
+  )
 }
