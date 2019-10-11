@@ -1,53 +1,31 @@
 import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import Home from './components/Home'
+import About from './components/About'
+import CustomLink from './components/CustomLink'
 
-import UserInfo from './components/UserInfo'
-
-import PublicPage from './components/PublicPage'
-import LoginPage from './components/LoginPage'
-
-import ProtectedPage from './components/ProtectedPage'
-import PrivateRoute from './components/PrivateRoute'
-
-const fakeAuth = {
-  isAuthenticated: false,
-  login(cb) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100);
-  },
-  logout(cb) {
-    fakeAuth.isAuthenticated = false;
-    setTimeout(cb, 100);
-  }
-};
-
-export default function App() {
-
+export default function CustomLinkExample() {
   return (
     <BrowserRouter>
       <div>
-        <UserInfo fakeAuth={ fakeAuth }/>
-
-        <ul>
-          <li>
-            <Link to="/public">Public Page</Link>
-          </li>
-          <li>
-            <Link to="/protected">Protected Page</Link>
-          </li>
-        </ul>
+        <CustomLink activeOnlyWhenExact={true} to="/" label="Home"/>
+        <CustomLink to="/about" label="About" />
+        {
+          /*
+            Upon routing, the contents of Router are re-rendered, except for Switch component
+            Switch component renders one the route children, whose path matching with routed URL.
+          */
+        }
+        <br />
 
         <Switch>
-          <Route path="/public">
-            <PublicPage />
+          <Route exact path="/">
+            <Home />
           </Route>
-          <Route path="/login">
-            <LoginPage fakeAuth={ fakeAuth } />
+          <Route path="/about">
+            <About />
           </Route>
-          <PrivateRoute path="/protected" fakeAuth={ fakeAuth } >
-            <ProtectedPage />
-          </PrivateRoute>
         </Switch>
       </div>
     </BrowserRouter>
